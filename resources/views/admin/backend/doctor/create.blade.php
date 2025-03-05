@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <h2>Add New Doctor</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('doctor.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">Name</label>
