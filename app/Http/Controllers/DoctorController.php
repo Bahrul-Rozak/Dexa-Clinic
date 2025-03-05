@@ -41,4 +41,13 @@ class DoctorController extends Controller
 
         return redirect()->route('doctor.index')->with('message', 'Doctor Created Success');
     }
+
+    public function edit($id){
+        $doctor_data = Doctor::find($id);
+        return view('admin.backend.doctor.edit', compact('doctor_data'));
+    }
+
+    public function update(Request $request, $id){
+        dd($request->all());
+    }
 }
