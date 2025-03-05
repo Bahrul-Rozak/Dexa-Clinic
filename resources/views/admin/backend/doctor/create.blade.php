@@ -17,10 +17,10 @@
         <div class="form-group">
             <label for="clinics">Clinics</label>
             <select name="clinic_id" id="clinics" class="form-control" name="clinic_id">
-                <option value="">Select Clinic</option>
-                <option value="">Cardiology</option>
-                <option value="">Dermatology</option>
-                <option value="">Neurology</option>
+                <option>Select Clinic</option>
+                <option>Cardiology</option>
+                <option>Dermatology</option>
+                <option>Neurology</option>
             </select>
         </div>
         <div class="form-group">
@@ -29,11 +29,11 @@
         </div>
         <div class="form-group">
             <label for="schedules">Schdules</label>
-            <select name="schedule_id" id="schedules" class="form-control" name="schedule_id">
-                <option value="">Select Schedule</option>
-                <option value="">Monday</option>
-                <option value="">Tuesday</option>
-                <option value="">Thursday</option>
+            <select name="practice_schedule" id="schedules" class="form-control" name="practice_schedule">
+                <option>Select Schedule</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Thursday</option>
             </select>
         </div>
 

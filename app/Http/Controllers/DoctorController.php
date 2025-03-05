@@ -17,11 +17,12 @@ class DoctorController extends Controller
     }
 
     public function store(Request $request){
+        //dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
-            'schedule_id' => 'required|string|max:255',        
+            'practice_schedule' => 'required|string|max:255',        
         ]);
 
         if($validator->fails()){
@@ -32,8 +33,8 @@ class DoctorController extends Controller
         $doctor->name = $request->input('name');
         $doctor->address = $request->input('address');
         $doctor->phone = $request->input('phone');
-        $doctor->schedule_id = $request->input('schedule_id');
-        $doctor->clinic_id = 0;
+        $doctor->practice_schedule = $request->input('practice_schedule');
+        $doctor->clinic_id = null;
 
         $doctor->save();
 
