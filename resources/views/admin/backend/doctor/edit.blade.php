@@ -9,7 +9,7 @@
         @method('PUT')
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="enter doctor name" name="name" value="dr. {{ old('name',$doctor_data->name )}}">
+            <input type="text" class="form-control" id="name" placeholder="enter doctor name" name="name" value="{{ old('name',$doctor_data->name )}}">
         </div>
         <div class="form-group">
             <label for="address">Address</label>

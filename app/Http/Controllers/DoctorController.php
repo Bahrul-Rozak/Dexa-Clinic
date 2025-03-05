@@ -48,6 +48,17 @@ class DoctorController extends Controller
     }
 
     public function update(Request $request, $id){
-        dd($request->all());
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'practice_schedule' => 'required|string|max:255',
+        ]);
+
+        $doctor = Doctor::findOrFail($id);
+        $doctor->update($validated);
+
+        return redirect()->route('doctor.index')->with('message', 'Doctor Update Success');
+
     }
 }
