@@ -30,7 +30,20 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach ($doctor_data as $doctors )
+                        <tr>
+                        <td>dr. {{$doctors->name}}</td>
+                        <td>{{$doctors->address}}</td>
+                        <td>{{$doctors->clinic_id}}</td>
+                        <td>{{$doctors->phone}}</td>
+                        <td>{{$doctors->practice_schedule}}</td>
+                        <td>
+                        <a href="" class="btn btn-info">Edit</a>
+                        <a href="" class="btn btn-danger">Delete</a>
+                        </td>
+                        </tr>
+                            
+                        @endforeach
                     </tbody>
                 </table>
             </div>

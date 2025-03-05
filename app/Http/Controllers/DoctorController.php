@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Validator;
 class DoctorController extends Controller
 {
     public function index(){
-        return view('admin.backend.doctor.index');
+        $doctor_data = Doctor::all();
+        return view('admin.backend.doctor.index', compact('doctor_data'));
     }
 
     public function create(){
