@@ -61,4 +61,17 @@ class DoctorController extends Controller
         return redirect()->route('doctor.index')->with('message', 'Doctor Update Success');
 
     }
+
+    public function show(){
+        $doctor_data = Doctor::all();
+        return view('admin.backend.doctor.index', compact('doctor_data'));
+    }
+
+    public function destroy($id){
+        $doctor = Doctor::findOrFail($id);
+        $doctor->delete();
+
+        return redirect()->route('doctor.index')->with('message', 'Doctor Delete Success');
+
+    }
 }

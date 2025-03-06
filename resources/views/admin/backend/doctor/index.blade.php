@@ -39,7 +39,12 @@
                         <td>{{$doctors->practice_schedule}}</td>
                         <td>
                         <a href="{{ route('doctor.edit', $doctors->id) }}" class="btn btn-info">Edit</a>
-                        <a href="" class="btn btn-danger">Delete</a>
+                        <form action="{{ route('doctor.destroy', $doctors->id) }}" method="post"
+                        onsubmit="return confirm('Are you sure want to delete this data?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                         </td>
                         </tr>
                             
