@@ -53,6 +53,14 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('clinic.index') }}" class="nav-link {{ Request::is('clinic*') ? 'active' : ' ' }}">
+                        <p>
+                            👩‍⚕️ Clinic
+                        </p>
+                    </a>
+                </li>
+
                 <li class="nav-header">Master Data Patient</li>
 
                 <li class="nav-item">
