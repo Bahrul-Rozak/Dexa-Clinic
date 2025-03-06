@@ -70,3 +70,20 @@
         }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
     });
 </script>
+
+<!-- Toastr -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+ <script>
+    toastr.option = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "timeOut": "3000"
+    }
+
+    @if(session('message'))
+        toastr.success("{{ session('message') }}")
+    @endif
+ </script>
