@@ -9,4 +9,8 @@ class ClinicController extends Controller
     public function index(){
         return view('admin.backend.clinic.index');
     }
+
+    public function create(){
+        return view('admin.backend.clinic.create');
+    }
 }

@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
-                        <a href="" class="btn btn-primary">Add Data</a>
+                        <a href="{{ route('clinic.create') }}" class="btn btn-primary">Add Data</a>
                     </div>
                 </div>
             </div>
