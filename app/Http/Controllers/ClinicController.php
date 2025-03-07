@@ -35,4 +35,17 @@ class ClinicController extends Controller
         $clinic_data = Clinic::find($id);
         return view('admin.backend.clinic.edit', compact('clinic_data'));
     }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $clinic = Clinic::findOrFail($id);
+
+        $clinic->update($validated);
+
+        return redirect()->route('clinic.index')->with('message', 'Clinic Update Success');
+
+    }
 }
