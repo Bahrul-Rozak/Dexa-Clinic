@@ -30,4 +30,9 @@ class ClinicController extends Controller
         return redirect()->route('clinic.index')->with('message', 'Clinic Created Success');
 
     }
+
+    public function edit($id){
+        $clinic_data = Clinic::find($id);
+        return view('admin.backend.clinic.edit', compact('clinic_data'));
+    }
 }
