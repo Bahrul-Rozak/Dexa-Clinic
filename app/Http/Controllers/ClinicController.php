@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class ClinicController extends Controller
 {
     public function index(){
-        return view('admin.backend.clinic.index');
+        $clinic_data = Clinic::all();
+        return view('admin.backend.clinic.index', compact('clinic_data'));
     }
 
     public function create(){
