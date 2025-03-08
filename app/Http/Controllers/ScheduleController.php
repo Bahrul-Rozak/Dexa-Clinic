@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class ScheduleController extends Controller
 {
     public function index(){
-        return view('admin.backend.schedule.index');
+        $schedule_data = Schedule::all();
+        return view('admin.backend.schedule.index', compact('schedule_data'));
     }
 
     public function create(){
