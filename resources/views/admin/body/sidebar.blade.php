@@ -56,7 +56,15 @@
                 <li class="nav-item">
                     <a href="{{ route('clinic.index') }}" class="nav-link {{ Request::is('clinic*') ? 'active' : ' ' }}">
                         <p>
-                            👩‍⚕️ Clinic
+                            🩺 Clinic
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('schedule.index') }}" class="nav-link {{ Request::is('schedule*') ? 'active' : ' ' }}">
+                        <p>
+                            📅 Schedule
                         </p>
                     </a>
                 </li>
