@@ -35,4 +35,17 @@ class ScheduleController extends Controller
         $schedule_data = Schedule::find($id);
         return view('admin.backend.schedule.edit', compact('schedule_data'));
     }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'practice_schedule' => 'required|string|max:255',
+        ]);
+
+        $schedule = Schedule::findOrFail($id);
+
+        $schedule->update($validated);
+
+        return redirect()->route('schedule.index')->with('message', 'Schedule Update Success');
+
+    }
 }
