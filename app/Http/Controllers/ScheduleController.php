@@ -30,4 +30,9 @@ class ScheduleController extends Controller
          return redirect()->route('schedule.index')->with('message', 'Schedule Created Success');
  
      }
+
+     public function edit($id){
+        $schedule_data = Schedule::find($id);
+        return view('admin.backend.schedule.edit', compact('schedule_data'));
+    }
 }
