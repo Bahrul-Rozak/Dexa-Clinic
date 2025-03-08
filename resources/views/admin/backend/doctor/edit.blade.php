@@ -19,7 +19,11 @@
             <label for="clinics">Clinics</label>
             <select name="clinic_id" id="clinics" class="form-control" name="clinic_id">
                @foreach ($clinics as $clinic)
-                   <option value="{{ $clinic->id }}">{{$clinic->name}}</option>
+               <option value="{{ $clinic->id }}"
+                    @if ($doctor_data->clinic_id == $clinic->id) 
+                    selected @endif>
+                    {{ $clinic->name }}
+                  </option>
                @endforeach
             </select>
         </div>
@@ -28,12 +32,15 @@
             <input type="text" class="form-control" id="phone" placeholder="enter doctor phone" name="phone" value="{{ old('phone',$doctor_data->phone )}}">
         </div>
         <div class="form-group">
-            <label for="schedules">Schdules</label>
-            <select name="practice_schedule" id="schedules" class="form-control" name="practice_schedule">
-                <option>Select Schedule</option>
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Thursday</option>
+            <label for="schedules">Schedules</label>
+            <select name="schedule_id" id="schedules" class="form-control" name="schedule_id">
+            @foreach ($schedules as $schedule)
+                  <option value="{{ $schedule->id }}"
+                    @if ($doctor_data->schedule_id == $schedule->id) 
+                    selected @endif>
+                    {{ $schedule->practice_schedule }}
+                  </option>
+               @endforeach
             </select>
         </div>
 

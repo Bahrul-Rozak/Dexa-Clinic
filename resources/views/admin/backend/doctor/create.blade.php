@@ -28,12 +28,12 @@
             <input type="text" class="form-control" id="phone" placeholder="enter doctor phone" name="phone">
         </div>
         <div class="form-group">
-            <label for="schedules">Schdules</label>
-            <select name="practice_schedule" id="schedules" class="form-control" name="practice_schedule">
+            <label for="schedules">Schedules</label>
+            <select name="schedule_id" id="schedules" class="form-control" name="schedule_id">
                 <option>Select Schedule</option>
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Thursday</option>
+                @foreach ($schedules as $schedule )
+                    <option value="{{ $schedule->id }}">{{ $schedule->practice_schedule }}</option>
+                @endforeach
             </select>
         </div>
 

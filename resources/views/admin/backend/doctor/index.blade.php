@@ -38,7 +38,7 @@
                         <td>{{$doctors->address}}</td>
                         <td>{{$doctors->clinic->name}}</td>
                         <td>{{$doctors->phone}}</td>
-                        <td>{{$doctors->practice_schedule}}</td>
+                        <td>{{$doctors->schedule->practice_schedule}}</td>
                         <td>
                        <div style="display: flex; align-items:center; gap: 10px;">
                        <a href="{{ route('doctor.edit', $doctors->id) }}" class="btn btn-info">Edit</a>

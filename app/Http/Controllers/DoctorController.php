@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Clinic;
 use App\Models\Doctor;
+use App\Models\Schedule;
+use Illuminate\Database\Events\SchemaDumped;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DoctorController extends Controller
 {
     public function index(){
-        $doctor_data = Doctor::with('clinic')->get();
+        $doctor_data = Doctor::with(['clinic', 'schedule'])->get();
         return view('admin.backend.doctor.index', compact('doctor_data'));
     }
 
     public function create(){
         $clinics = Clinic::all();
-        return view('admin.backend.doctor.create', compact('clinics'));
+        $schedules = Schedule::all();
+        return view('admin.backend.doctor.create', compact('clinics', 'schedules'));
     }
 
     public function store(Request $request){
@@ -25,7 +28,7 @@ class DoctorController extends Controller
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
-            'practice_schedule' => 'required|string|max:255', 
+            'schedule_id' => 'required|exists:schedules,id', 
             'clinic_id' => 'required|exists:clinics,id'       
         ]);
 
@@ -37,7 +40,7 @@ class DoctorController extends Controller
             'name' => $request->name,
             'address' => $request->address,
             'phone' => $request->phone,
-            'practice_schedule' => $request->practice_schedule,
+            'schedule_id' => $request->schedule_id,
             'clinic_id' => $request->clinic_id,
         ]);
 
@@ -47,7 +50,8 @@ class DoctorController extends Controller
     public function edit($id){
         $doctor_data = Doctor::find($id);
         $clinics = Clinic::all();
-        return view('admin.backend.doctor.edit', compact('doctor_data', 'clinics'));
+        $schedules = Schedule::all();
+        return view('admin.backend.doctor.edit', compact('doctor_data', 'clinics', 'schedules'));
     }
 
     public function update(Request $request, $id){
@@ -55,7 +59,7 @@ class DoctorController extends Controller
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
-            'practice_schedule' => 'required|string|max:255',
+            'schedule_id' => 'required|exists:schedules,id', 
             'clinic_id' => 'required|exists:clinics,id'       
         ]);
 

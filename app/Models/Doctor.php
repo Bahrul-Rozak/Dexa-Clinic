@@ -13,10 +13,12 @@ class Doctor extends Model
         'clinic_id',
         'phone',
         'schedule_id',
-        'practice_schedule'
     ];
 
     public function clinic(){
         return $this->belongsTo(Clinic::class, 'clinic_id');
+    }
+    public function schedule(){
+        return $this->belongsTo(Schedule::class, 'schedule_id');
     }
 }
