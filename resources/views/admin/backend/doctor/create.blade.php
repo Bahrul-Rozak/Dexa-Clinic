@@ -18,9 +18,9 @@
             <label for="clinics">Clinics</label>
             <select name="clinic_id" id="clinics" class="form-control" name="clinic_id">
                 <option>Select Clinic</option>
-                <option>Cardiology</option>
-                <option>Dermatology</option>
-                <option>Neurology</option>
+                @foreach ($clinics as $clinic )
+                    <option value="{{ $clinic->id }}">{{ $clinic->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">
