@@ -48,4 +48,17 @@ class ClinicController extends Controller
         return redirect()->route('clinic.index')->with('message', 'Clinic Update Success');
 
     }
+
+    public function show(){
+        $clinic_data = Clinic::all();
+        return view('admin.backend.clinic.index', compact('$clinic_data'));
+    }
+
+    public function destroy($id){
+        $clinic = Clinic::findOrFail($id);
+        $clinic->delete();
+
+        return redirect()->route('clinic.index')->with('message', 'Clinic Delete Success');
+
+    }
 }
