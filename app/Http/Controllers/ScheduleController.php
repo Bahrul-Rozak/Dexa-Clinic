@@ -48,4 +48,17 @@ class ScheduleController extends Controller
         return redirect()->route('schedule.index')->with('message', 'Schedule Update Success');
 
     }
+
+    public function show(){
+        $schedule_data = Schedule::all();
+        return view('admin.backend.schedule.index', compact('$schedule_data'));
+    }
+
+    public function destroy($id){
+        $schedule = Schedule::findOrFail($id);
+        $schedule->delete();
+
+        return redirect()->route('schedule.index')->with('message', 'Schedule Delete Success');
+
+    }
 }
