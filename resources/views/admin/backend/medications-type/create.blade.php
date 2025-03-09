@@ -4,11 +4,11 @@
 
 <div class="container-fluid">
     <h2>Add New Medications Type</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('medications-type.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="medications_type">Medications Type</label>
-            <input type="text" class="form-control" id="medications_type" placeholder="enter medications type" name="medications_type">
+            <label for="medication_type">Medications Type</label>
+            <input type="text" class="form-control" id="medication_type" placeholder="enter medications type" name="medication_type">
         </div>
 
         <button type="submit" class="btn btn-success">Add</button>
