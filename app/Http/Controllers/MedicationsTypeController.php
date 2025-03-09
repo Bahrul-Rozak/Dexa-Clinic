@@ -35,4 +35,17 @@ class MedicationsTypeController extends Controller
         $medications_type_data = MedicationsType::find($id);
         return view('admin.backend.medications-type.edit', compact('medications_type_data'));
     }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'medication_type' => 'required|string|max:255',
+        ]);
+
+        $type = MedicationsType::findOrFail($id);
+
+        $type->update($validated);
+
+        return redirect()->route('medications-type.index')->with('message', 'Medications Type Update Success');
+
+    }
 }
