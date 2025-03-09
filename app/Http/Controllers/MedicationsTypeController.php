@@ -48,4 +48,17 @@ class MedicationsTypeController extends Controller
         return redirect()->route('medications-type.index')->with('message', 'Medications Type Update Success');
 
     }
+
+    public function show(){
+        $medications_type_data = MedicationsType::all();
+        return view('admin.backend.medications-type.index', compact('medications_type_data'));
+    }
+
+    public function destroy($id){
+        $type = MedicationsType::findOrFail($id);
+        $type->delete();
+
+        return redirect()->route('medications-type.index')->with('message', 'Medications Type Delete Success');
+
+    }
 }
