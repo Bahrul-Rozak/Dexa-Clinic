@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class MedicationsTypeController extends Controller
 {
     public function index(){
-        return view('admin.backend.medications-type.index');
+        $medications_type_data = MedicationsType::all();
+        return view('admin.backend.medications-type.index', compact('medications_type_data'));
     }
 
     public function create(){
