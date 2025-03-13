@@ -9,4 +9,8 @@ class MedicationsController extends Controller
     public function index(){
         return view('admin.backend.medications.index');
     }
+
+    public function create(){
+        return view('admin.backend.medications.create');
+    }
 }
