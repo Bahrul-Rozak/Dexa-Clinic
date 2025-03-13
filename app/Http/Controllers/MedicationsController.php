@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class MedicationsController extends Controller
 {
     public function index(){
-        return view('admin.backend.medications.index');
+        $medications_data = Medications::with('type')->get();
+        return view('admin.backend.medications.index', compact('medications_data'));
     }
 
     public function create(){
