@@ -32,7 +32,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                   
+                    @foreach ($employee_data as $employees )
+                        <tr>
+                        <td> {{ $loop->iteration }} </td>
+                        <td>{{$employees->employee_code}}</td>
+                        <td>{{$employees->name}}</td>
+                        <td>{{$employees->gender}}</td>
+                        <td>{{$employees->phone}}</td>
+                        <td>{{$employees->religion}}</td>
+                        <td>{{$employees->position}}</td>
+                        <td>
+                       <div style="display: flex; align-items:center; gap: 10px;">
+                       <a href="" class="btn btn-info">Edit</a>
+                        <form action="" method="post"
+                        onsubmit="return confirm('Are you sure want to delete this data?')"
+                        style="margin: 0";>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                       </div>
+                        </td>
+                        </tr>
+                            
+                        @endforeach
                     </tbody>
                 </table>
             </div>

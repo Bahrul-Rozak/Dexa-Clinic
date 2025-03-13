@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class EmployeesController extends Controller
 {
     public function index(){
-        return view('admin.backend.employees.index');
+        $employee_data = Employees::all();
+        return view('admin.backend.employees.index', compact('employee_data'));
     }
 
     public function create(){
