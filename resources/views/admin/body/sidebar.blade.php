@@ -42,7 +42,7 @@
                         </p>
                     </a>
                 </li>
-             
+
                 <li class="nav-header">Master Data Doctor</li>
 
                 <li class="nav-item">
@@ -82,7 +82,17 @@
                 <li class="nav-item">
                     <a href="{{ route('medications.index') }}" class="nav-link {{ Request::is('medications*') ? 'active' : ' ' }}">
                         <p>
-                            💊 Medications 
+                            💊 Medications
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-header">Master Data Employees</li>
+
+                <li class="nav-item">
+                    <a href="{{ route('employees.index') }}" class="nav-link {{ Request::is('employees*') ? 'active' : ' ' }}">
+                        <p>
+                            😎 Employees
                         </p>
                     </a>
                 </li>
@@ -96,7 +106,7 @@
                         </p>
                     </a>
                 </li>
-             
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
