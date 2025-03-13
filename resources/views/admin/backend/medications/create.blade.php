@@ -7,10 +7,6 @@
     <form action="{{ route('medications.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="medication_code">Medications Code</label>
-            <input type="text" class="form-control" id="medication_code" placeholder="enter medications code" name="medication_code">
-        </div>
-        <div class="form-group">
             <label for="stock">Stock</label>
             <input type="text" class="form-control" id="stock" placeholder="enter medications stock" name="stock">
         </div>

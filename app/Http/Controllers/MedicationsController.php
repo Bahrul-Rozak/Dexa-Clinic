@@ -20,7 +20,7 @@ class MedicationsController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'medication_code' => 'required|string|max:255',
+            'medication_code' => 'nullable|string|max:255',
             'stock' => 'required|integer|min:0',
             'type_id' => 'required|exists:medications_type,id',
             'name' => 'required|string|max:255',
@@ -29,8 +29,12 @@ class MedicationsController extends Controller
             'expiration_date' =>  'nullable|date|min: 0',
         ]);
 
+        $date = now()->format('Ymd');
+        $countToday = Medications::whereDate('created_at', now()->toDateString())->count() + 1;
+        $medication_code = 'MED' . $date . str_pad($countToday, 4, '0', STR_PAD_LEFT);
+
         Medications::create([
-            'medication_code'=>$request->medication_code,
+            'medication_code'=>$medication_code,
             'stock'=>$request->stock,
             'type_id'=>$request->type_id,
             'name'=>$request->name,
