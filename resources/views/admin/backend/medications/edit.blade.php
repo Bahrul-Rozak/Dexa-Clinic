@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <h2>Edit Medications Data</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('medications.update', $medications_data->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">

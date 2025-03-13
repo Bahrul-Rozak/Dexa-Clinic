@@ -47,4 +47,23 @@ class MedicationsController extends Controller
         $medications_type_data = MedicationsType::all();
         return view('admin.backend.medications.edit', compact('medications_data', 'medications_type_data'));
     }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'medication_code' => 'required|string|max:255',
+            'stock' => 'required|integer|min:0',
+            'type_id' => 'required|exists:medications_type,id',
+            'name' => 'required|string|max:255',
+            'dosage' => 'nullable|string|max: 255',
+            'price' => 'nullable|numeric|min: 0',
+            'expiration_date' =>  'nullable|date|min: 0',
+        ]);
+
+        $medication = Medications::findOrFail($id);
+
+        $medication->update($validated);
+
+        return redirect()->route('medications.index')->with('message', 'Medications Update Success');
+
+    }
 }
