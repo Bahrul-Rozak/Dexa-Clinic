@@ -45,7 +45,7 @@
                         <td style="text-align: right;">{{$medications->expiration_date}}</td>
                         <td>
                        <div style="display: flex; align-items:center; gap: 10px;">
-                       <a href="" class="btn btn-info">Edit</a>
+                       <a href="{{ route('medications.edit', $medications->id) }}" class="btn btn-info">Edit</a>
                         <form action="" method="post"
                         onsubmit="return confirm('Are you sure want to delete this data?')"
                         style="margin: 0";>

@@ -41,4 +41,10 @@ class MedicationsController extends Controller
 
         return redirect()->route('medications.index')->with('message', 'Medications Created Success');
     }
+
+    public function edit($id){
+        $medications_data = Medications::find($id);
+        $medications_type_data = MedicationsType::all();
+        return view('admin.backend.medications.edit', compact('medications_data', 'medications_type_data'));
+    }
 }
