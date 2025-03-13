@@ -88,4 +88,22 @@ class MedicationsController extends Controller
         $medications_data = Medications::find($id);
         return view('admin.backend.medications.edit-stock', compact('medications_data'));
     }
+
+    public function addstock(Request $request, $id){
+        $validated = $request->validate([
+            'add_stock' => 'required|integer|min:1'
+        ]);
+
+        $medication = Medications::findOrFail($id);
+        $medication->stock += $validated['add_stock'];
+
+        if($request->expiration_date){
+            $medication->expiration_date = $request->expiration_date;
+        }
+
+        $medication->save();
+
+        return redirect()->route('medications.index')->with('message', 'Medications Stock Update Success');
+
+    }
 }

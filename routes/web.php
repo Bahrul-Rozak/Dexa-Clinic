@@ -22,6 +22,7 @@ Route::resource('schedule', ScheduleController::class);
 Route::resource('medications-type', MedicationsTypeController::class);
 Route::resource('medications', MedicationsController::class);
 Route::get('medications/{id}/edit-stock', [MedicationsController::class, 'editstock'])->name('medications.edit_stock');
+Route::post('medications/{id}/add-stock', [MedicationsController::class, 'addstock'])->name('medications.add_stock');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
