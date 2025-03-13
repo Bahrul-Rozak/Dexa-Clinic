@@ -83,4 +83,9 @@ class MedicationsController extends Controller
         return redirect()->route('medications.index')->with('message', 'Medications Delete Success');
 
     }
+
+    public function editstock($id){
+        $medications_data = Medications::find($id);
+        return view('admin.backend.medications.edit-stock', compact('medications_data'));
+    }
 }
