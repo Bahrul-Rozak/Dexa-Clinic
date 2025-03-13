@@ -46,7 +46,7 @@
                         <td>
                        <div style="display: flex; align-items:center; gap: 10px;">
                        <a href="{{ route('medications.edit', $medications->id) }}" class="btn btn-info">Edit</a>
-                        <form action="" method="post"
+                        <form action="{{ route('medications.destroy', $medications->id) }}" method="post"
                         onsubmit="return confirm('Are you sure want to delete this data?')"
                         style="margin: 0";>
                             @csrf

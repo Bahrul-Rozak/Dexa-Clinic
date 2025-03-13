@@ -66,4 +66,17 @@ class MedicationsController extends Controller
         return redirect()->route('medications.index')->with('message', 'Medications Update Success');
 
     }
+
+    public function show(){
+        $medications_data = Medications::all();
+        return view('admin.backend.medications.index', compact('$medications_data'));
+    }
+
+    public function destroy($id){
+        $medication = Medications::findOrFail($id);
+        $medication->delete();
+
+        return redirect()->route('medications.index')->with('message', 'Medications Delete Success');
+
+    }
 }
