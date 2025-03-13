@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <h2>Add New Medications</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('medications.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="medication_code">Medications Code</label>
@@ -16,7 +16,12 @@
         </div>
         <div class="form-group">
             <label for="type_id">Type Id</label>
-            <input type="text" class="form-control" id="type_id" placeholder="enter medications Type" name="type_id">
+            <select name="type_id" id="type_id" class="form-control" name="type_id">
+                <option>Select Type</option>
+                @foreach ($medications_type_data as $type )
+                <option value="{{ $type->id }}">{{ $type->medication_type }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label for="name">Name</label>
@@ -39,5 +44,5 @@
         <a href="{{ route('medications.index') }}" class="btn btn-warning">Back</a>
     </form>
 </div>
-    
+
 @endsection
