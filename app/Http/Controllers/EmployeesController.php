@@ -64,4 +64,17 @@ class EmployeesController extends Controller
         return redirect()->route('employees.index')->with('message', 'Employee Update Success');
 
     }
+
+    public function show(){
+        $employee_data = Employees::all();
+        return view('admin.backend.employees.index', compact('$employee_data'));
+    }
+
+    public function destroy($id){
+        $employee = Employees::findOrFail($id);
+        $employee->delete();
+
+        return redirect()->route('employees.index')->with('message', 'Employee Delete Success');
+
+    }
 }
