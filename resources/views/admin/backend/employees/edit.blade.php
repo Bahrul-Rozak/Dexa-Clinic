@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <h2>Edit Employee</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('employees.update', $employee_data->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -50,7 +50,7 @@
         </div>
         <div class="form-group">
             <label for="position">Position</label>
-            
+
             <select name="position" id="position" class="form-control" name="position">
                 @foreach(['nurse', 'pharmacist', 'doctor', 'finance','security'] as $position)
 

@@ -45,4 +45,23 @@ class EmployeesController extends Controller
         $employee_data = Employees::find($id);
         return view('admin.backend.employees.edit', compact('employee_data'));
     }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'employee_code' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'gender' => 'required|string|in:male,female',
+            'phone' => 'required|string|max:255',
+            'religion' => 'required|string|in:islam,kristen,hindu,budha,konghucu',
+            'position' => 'required|string|in:nurse,pharmacist,doctor,finance,security',
+        ]);
+
+        $employee = Employees::findOrFail($id);
+
+        $employee->update($validated);
+
+        return redirect()->route('employees.index')->with('message', 'Employee Update Success');
+
+    }
 }
