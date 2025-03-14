@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <label for="employee_code">Employee Code</label>
-            <input type="text" class="form-control" id="employee_code" placeholder="enter employee code" name="employee_code" value="{{ old('employee_code',$employee_data->employee_code )}}">
+            <input type="text" class="form-control" id="employee_code" placeholder="enter employee code" name="employee_code" value="{{ old('employee_code',$employee_data->employee_code )}}" readonly>
         </div>
         <div class="form-group">
             <label for="name">Name</label>

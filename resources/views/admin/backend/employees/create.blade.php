@@ -6,10 +6,7 @@
     <h2>Add New Employee</h2>
     <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="form-group">
-            <label for="employee_code">Employee Code</label>
-            <input type="text" class="form-control" id="employee_code" placeholder="enter employee code" name="employee_code">
-        </div>
+        
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" placeholder="enter employee name" name="name">

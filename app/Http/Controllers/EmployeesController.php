@@ -18,7 +18,7 @@ class EmployeesController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'employee_code' => 'required|string|max:255',
+            'employee_code' => 'nullable|string|max:255',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'gender' => 'required|string|in:male,female',
@@ -27,8 +27,12 @@ class EmployeesController extends Controller
             'position' => 'required|string|in:nurse,pharmacist,doctor,finance,security',
         ]);
 
+        $date = now()->format('Ymd');
+        $countToday = Employees::whereDate('created_at', now()->toDateString())->count() + 1;
+        $employee_code = 'EMP' . $date . str_pad($countToday, 4, '0', STR_PAD_LEFT);
+
         Employees::create([
-            'employee_code'=>$request->employee_code,
+            'employee_code'=>$employee_code,
             'name'=>$request->name,
             'address'=>$request->address,
             'gender'=>$request->gender,
