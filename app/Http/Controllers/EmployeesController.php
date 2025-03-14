@@ -40,4 +40,9 @@ class EmployeesController extends Controller
         return redirect()->route('employees.index')->with('message', 'Employees Created Success');
 
     }
+
+    public function edit($id){
+        $employee_data = Employees::find($id);
+        return view('admin.backend.employees.edit', compact('employee_data'));
+    }
 }
