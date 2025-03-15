@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
-                        <a href="" class="btn btn-primary">Add Data</a>
+                        <a href="{{ route('patients.create') }}" class="btn btn-primary">Add Data</a>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                     <thead>
                         <tr>
                             <th style="width: 5%;">No</th>
-                            <th style="width: 10%;">patient_code</th>
+                            <th style="width: 10%;">Patient Code</th>
                             <th style="width: 10%;">Name</th>
                             <th style="width: 10%;">Address</th>
                             <th style="width: 10%;">Birth Date</th>
