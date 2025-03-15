@@ -100,7 +100,7 @@
                 <li class="nav-header">Master Data Patient</li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('patients.index') }}" class="nav-link {{ Request::is('patients*') ? 'active' : ' ' }}">
                         <p>
                             😷 Patient
                         </p>
