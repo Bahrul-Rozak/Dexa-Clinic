@@ -4,8 +4,13 @@
 
 <div class="container-fluid">
     <h2>Add New Patient</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('patients.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+
+        <div class="form-group">
+            <label for="patient_code">Patient Code</label>
+            <input type="text" class="form-control" id="patient_code" placeholder="enter patient patient_code" name="patient_code">
+        </div>
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" placeholder="enter patient name" name="name">
@@ -54,7 +59,15 @@
 
         <div class="form-group">
             <label for="education">Education</label>
-            <input type="text" class="form-control" id="education" placeholder="enter patient education" name="education">
+            <select name="education" id="education" class="form-control" name="education">
+                <option>Select Education</option>
+                <option value="sd">SD</option>
+                <option value="smp">SMP</option>
+                <option value="sma">SMA</option>
+                <option value="sarjana">S1</option>
+                <option value="master">S2</option>
+                <option value="doctor">S3</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -67,13 +80,18 @@
         </div>
 
         <div class="form-group">
-            <label for="occupation">Complaint</label>
-            <input type="text" class="form-control" id="occupation" placeholder="enter patient occupation" name="occupation">
+            <label for="complaint">Complaint</label>
+            <input type="text" class="form-control" id="complaint" placeholder="enter patient complaint" name="complaint">
         </div>
 
         <div class="form-group">
-            <label for="doctor">Doctor</label>
-            <input type="text" class="form-control" id="doctor" placeholder="enter patient doctor" name="doctor">
+            <label for="doctor_id">Doctor</label>
+            <select name="doctor_id" id="doctors" class="form-control" name="doctor_id">
+                <option>Select Doctors</option>
+                @foreach ($doctors as $doctor )
+                    <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <button type="submit" class="btn btn-success">Add</button>
