@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <h2>Add New User</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user-management.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">Name</label>
@@ -25,8 +25,8 @@
             <label for="is_super_admin">Is Super Admin?</label>
             <select name="is_super_admin" id="is_super_admin" class="form-control" name="is_super_admin">
                 <option>Select</option>
-                <option value="is_admin">Admin</option>
-                <option value="is_super_admin">Super Admin</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
             </select>
         </div>
 
@@ -34,8 +34,8 @@
             <label for="is_admin">Is Admin?</label>
             <select name="is_admin" id="is_admin" class="form-control" name="is_admin">
                 <option>Select</option>
-                <option value="is_admin">Admin</option>
-                <option value="is_super_admin">Super Admin</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
             </select>
         </div>
 
