@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        return view('admin.backend.user-management.index');
+        $user_data = User::all();
+        return view('admin.backend.user-management.index', compact('user_data'));
     }
 
     public function create(){
