@@ -54,4 +54,10 @@ class PatientsController extends Controller
          return redirect()->route('patients.index')->with('message', 'Patient Created Success');
  
      }
+
+     public function edit($id){
+        $patient_data = Patient::find($id);
+        $doctors = Doctor::all();
+        return view('admin.backend.patients.edit', compact('patient_data', 'doctors'));
+    }
 }
