@@ -60,4 +60,26 @@ class PatientsController extends Controller
         $doctors = Doctor::all();
         return view('admin.backend.patients.edit', compact('patient_data', 'doctors'));
     }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'patient_code' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'birth_date' => 'required|date',
+            'gender' => 'required|in:male,female',
+            'phone' => 'required|string|max:255',
+            'religion' => 'required|in:islam,kristen,hindu,budha,konghucu',
+            'education' => 'required|in:sd,smp,sma,sarjana,master,doctor',
+            'occupation' => 'required|in:employed,unemployed',
+            'national_id' => 'required|string|max:255',
+            'doctor_id' => 'required|exists:doctors,id',  
+        ]);
+
+        $patient = Patient::findOrFail($id);
+        $patient->update($validated);
+
+        return redirect()->route('patients.index')->with('message', 'Patient Update Success');
+
+    }
 }

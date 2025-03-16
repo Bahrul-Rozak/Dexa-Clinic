@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <h2>Edit Patient</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('patients.update', $patient_data->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -47,7 +47,7 @@
 
         <div class="form-group">
             <label for="education">Phone</label>
-            <input type="text" class="form-control" id="phone" placeholder="enter patient phone" name="phone">
+            <input type="text" class="form-control" id="phone" placeholder="enter patient phone" name="phone" value="{{ old('phone',$patient_data->phone )}}">
         </div>
 
         <div class="form-group">
