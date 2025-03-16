@@ -38,4 +38,9 @@ class UserController extends Controller
          return redirect()->route('user-management.index')->with('message', 'User Created Success');
  
      }
+
+     public function edit($id){
+        $user_data = User::find($id);
+        return view('admin.backend.user-management.edit', compact('user_data'));
+    }
 }
