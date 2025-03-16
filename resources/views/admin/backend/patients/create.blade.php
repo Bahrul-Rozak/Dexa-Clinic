@@ -8,10 +8,6 @@
         @csrf
 
         <div class="form-group">
-            <label for="patient_code">Patient Code</label>
-            <input type="text" class="form-control" id="patient_code" placeholder="enter patient patient_code" name="patient_code">
-        </div>
-        <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" placeholder="enter patient name" name="name">
         </div>
@@ -89,7 +85,7 @@
             <select name="doctor_id" id="doctors" class="form-control" name="doctor_id">
                 <option>Select Doctors</option>
                 @foreach ($doctors as $doctor )
-                    <option value="{{ $doctor->id }}">{{ $doctor->name }} - {{ $doctor->clinic->name }}</option>
+                    <option value="{{ $doctor->id }}">dr. {{ $doctor->name }} - {{ $doctor->clinic->name }}</option>
                 @endforeach
             </select>
         </div>

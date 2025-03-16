@@ -99,7 +99,7 @@
                   <option value="{{ $doctor->id }}"
                     @if ($patient_data->doctor_id == $doctor->id) 
                     selected @endif>
-                    {{ $doctor->name }} - {{ $doctor->clinic->name }}
+                    dr. {{ $doctor->name }} - {{ $doctor->clinic->name }}
                   </option>
                @endforeach
             </select>

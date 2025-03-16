@@ -23,7 +23,7 @@ class PatientsController extends Controller
         // dd($request->all());
  
          $request->validate([
-             'patient_code' => 'required|string|max:255',
+             'patient_code' => 'nullable|string|max:255',
              'name' => 'required|string|max:255',
              'address' => 'required|string|max:255',
              'birth_date' => 'required|date',
@@ -36,9 +36,13 @@ class PatientsController extends Controller
              'doctor_id' => 'required|exists:doctors,id',
              // 'complaint' => 'required|exists:doctors,id',
          ]);
+
+         $date = now()->format('Ymd');
+         $countToday = Patient::whereDate('created_at', now()->toDateString())->count() + 1;
+         $patient_code = 'PAT' . $date . str_pad($countToday, 4, '0', STR_PAD_LEFT);
  
          Patient::create([
-             'patient_code'=>$request->patient_code,
+             'patient_code'=>$patient_code,
              'name'=>$request->name,
              'address'=>$request->address,
              'birth_date'=>$request->birth_date,
