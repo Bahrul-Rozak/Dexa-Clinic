@@ -75,4 +75,17 @@ class UserController extends Controller
 
         return redirect()->route('user-management.index')->with('message', 'User Update Success');
     }
+
+    public function show(){
+        $user_data = User::all();
+        return view('admin.backend.user-management.index', compact('$user_data'));
+    }
+
+    public function destroy($id){
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('user-management.index')->with('message', 'User Delete Success');
+
+    }
 }
