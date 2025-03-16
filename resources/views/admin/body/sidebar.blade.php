@@ -107,6 +107,16 @@
                     </a>
                 </li>
 
+                <li class="nav-header">General Setting</li>
+
+                <li class="nav-item">
+                    <a href="{{  route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : ' ' }}"">
+                        <p>
+                            😷 User Management
+                        </p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

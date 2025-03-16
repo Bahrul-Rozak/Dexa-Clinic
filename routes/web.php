@@ -8,6 +8,7 @@ use App\Http\Controllers\MedicationsTypeController;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,7 @@ Route::get('medications/{id}/edit-stock', [MedicationsController::class, 'editst
 Route::post('medications/{id}/add-stock', [MedicationsController::class, 'addstock'])->name('medications.add_stock');
 Route::resource('employees', EmployeesController::class);
 Route::resource('patients', PatientsController::class);
+Route::resource('user-management', UserController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
