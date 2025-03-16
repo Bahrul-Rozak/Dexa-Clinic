@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <h2>Edit User</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user-management.update', $user_data->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -18,6 +18,11 @@
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="enter user password" name="password" value="{{ old('password',$user_data->password )}}">
+        </div>
+
+        <div class="form-group">
+            <label for="password_confirmation">Confirm Password</label>
+            <input type="password" class="form-control" id="password_confirmation" placeholder="enter user password_confirmation" name="password_confirmation">
         </div>
 
         <div class="form-group">

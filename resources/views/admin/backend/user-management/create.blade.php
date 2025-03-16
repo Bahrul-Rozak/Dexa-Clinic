@@ -21,6 +21,8 @@
             <input type="password" class="form-control" id="password" placeholder="enter user password" name="password">
         </div>
 
+        
+
         <div class="form-group">
             <label for="is_super_admin">Is Super Admin?</label>
             <select name="is_super_admin" id="is_super_admin" class="form-control" name="is_super_admin">
