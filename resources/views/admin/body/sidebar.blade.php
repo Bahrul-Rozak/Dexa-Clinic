@@ -36,10 +36,20 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
                         </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <p>
+                            Logout
+                        </p>
+                        <form action="{{ route('logout') }}" method="POST" style="display: none;" id="logout-form">
+                            @csrf
+                        </form>
                     </a>
                 </li>
 
