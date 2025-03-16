@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class PatientsController extends Controller
     }
 
     public function create(){
-        $doctors = Doctor::all();
+        $doctors = Doctor::with('clinic')->get();
         return view('admin.backend.patients.create', compact('doctors'));
     }
 
@@ -57,7 +58,7 @@ class PatientsController extends Controller
 
      public function edit($id){
         $patient_data = Patient::find($id);
-        $doctors = Doctor::all();
+        $doctors = Doctor::with('clinic')->get();
         return view('admin.backend.patients.edit', compact('patient_data', 'doctors'));
     }
 
@@ -80,6 +81,19 @@ class PatientsController extends Controller
         $patient->update($validated);
 
         return redirect()->route('patients.index')->with('message', 'Patient Update Success');
+
+    }
+
+    public function show(){
+        $patient_data = Patient::all();
+        return view('admin.backend.patients.index', compact('$patient_data'));
+    }
+
+    public function destroy($id){
+        $patient = Patient::findOrFail($id);
+        $patient->delete();
+
+        return redirect()->route('patients.index')->with('message', 'Patient Delete Success');
 
     }
 }

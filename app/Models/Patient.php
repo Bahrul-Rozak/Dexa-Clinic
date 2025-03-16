@@ -17,10 +17,15 @@ class Patient extends Model
         'education',
         'occupation',
         'national_id',
-        'doctor_id'
+        'doctor_id',
+        'clinic_id'
     ];
 
     public function doctor(){
         return $this->belongsTo(Model::class, 'doctor_id');
+    }
+
+    public function clinic(){
+        return $this->belongsTo(Clinic::class, 'clinic_id');
     }
 }
