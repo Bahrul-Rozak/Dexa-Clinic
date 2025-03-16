@@ -82,7 +82,7 @@
                 <li class="nav-item">
                     <a href="{{ route('medications.index') }}" class="nav-link {{ Request::is('medications*') ? 'active' : ' ' }}">
                         <p>
-                            💊 Medications
+                            ⚕ Medications
                         </p>
                     </a>
                 </li>
@@ -92,7 +92,7 @@
                 <li class="nav-item">
                     <a href="{{ route('employees.index') }}" class="nav-link {{ Request::is('employees*') ? 'active' : ' ' }}">
                         <p>
-                            😎 Employees
+                            💼 Employees
                         </p>
                     </a>
                 </li>
@@ -113,7 +113,7 @@
                 <li class="nav-item">
                     <a href="{{  route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : ' ' }}"">
         <p>
-            😷 User Management
+            💻 User Management
         </p>
     </a>
 </li>
