@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class PatientsController extends Controller
 {
     public function index(){
-        return view('admin.backend.patients.index');
+        $patient_data = Patient::all();
+        return view('admin.backend.patients.index', compact('patient_data'));
     }
 
     public function create(){
