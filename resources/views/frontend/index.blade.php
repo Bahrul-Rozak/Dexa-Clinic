@@ -116,7 +116,7 @@
                 <h1 class="header-title">Selamat <span class="text-primary">Datang!</span></h1>
                 <p class="lead">Temukan Dokter, Buat Janji, Mudah.</p>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Coba Mendaftar!</button>
-                <a href="" class="btn btn-secondary">Lihat Antrian</a>
+                <a href="{{ route('queue') }}" class="btn btn-secondary">Lihat Antrian</a>
             </div>
             <div class="col-md-6">
                 <img src="https://img.freepik.com/free-photo/front-view-young-smiling-doctor_179666-27135.jpg" alt="doctor" class="img-fluid rounded">

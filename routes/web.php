@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\MedicationsController;
 use App\Http\Controllers\MedicationsTypeController;
 use App\Http\Controllers\PatientsController;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontend.index');
 });
+
+Route::get('/queue', [FrontEndController::class, 'queue'])->name('queue');
 
 Route::get('/dashboard', function () {
     return view('admin.index');

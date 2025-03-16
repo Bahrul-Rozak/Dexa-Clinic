@@ -9,4 +9,8 @@ class FrontEndController extends Controller
     public function index(){
         return view('frontend.index');
     }
+
+    public function queue(){
+        return view('frontend.queue');
+    }
 }
