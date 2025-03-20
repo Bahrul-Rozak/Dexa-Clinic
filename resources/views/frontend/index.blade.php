@@ -168,7 +168,7 @@
 
     <!-- Modal -->
     <!-- Modal -->
-    <form action="" method="POST">
+    <form action="{{ route('patient.signup') }}" method="POST">
         @csrf
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -236,15 +236,14 @@
                             <div class="mb-3 row">
                                 <label for="education" class="col-sm-2 col-form-label">Education</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="education" name="education">
-                                        <option selected>Select Education Level</option>
+                                    <select name="education" id="education" class="form-control" name="education">
+                                        <option>Select Education</option>
                                         <option value="sd">SD</option>
                                         <option value="smp">SMP</option>
                                         <option value="sma">SMA</option>
-                                        <option value="diploma">Diploma</option>
-                                        <option value="sarjana">Sarjana (S1)</option>
-                                        <option value="magister">Magister (S2)</option>
-                                        <option value="doktor">Doktor (S3)</option>
+                                        <option value="sarjana">S1</option>
+                                        <option value="master">S2</option>
+                                        <option value="doctor">S3</option>
                                     </select>
                                 </div>
                             </div>
@@ -267,10 +266,13 @@
                             <div class="mb-3 row">
                                 <label for="doctor" class="col-sm-2 col-form-label">Doctor</label>
                                 <div class="col-sm-10">
-                                    <select name="doctor_id" id="doctor_id" class="form-control" required>
-                                        <option value="" disabled selected>Select a doctor</option>
-                                       
+                                    <select name="doctor_id" id="doctors" class="form-control" name="doctor_id">
+                                        <option>Select Doctors</option>
+                                        @foreach ($doctors as $doctor )
+                                        <option value="{{ $doctor->id }}">dr. {{ $doctor->name }} - {{ $doctor->clinic->name }}</option>
+                                        @endforeach
                                     </select>
+
                                 </div>
                             </div>
                             <div class="mb-3 row">

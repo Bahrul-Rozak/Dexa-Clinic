@@ -12,11 +12,10 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+Route::get('/', [FrontEndController::class, 'index']);
 
 Route::get('/queue', [FrontEndController::class, 'queue'])->name('queue');
+Route::post('/patient-sign-up', [FrontEndController::class, 'patientSignUp'])->name('patient.signup');
 
 Route::get('/dashboard', function () {
     return view('admin.index');
