@@ -57,12 +57,17 @@
                 <li class="nav-item">
                     <a href="{{ route('patient-queue.index') }}" class="nav-link {{ Request::is('patient-queue*') ? 'active' : ' ' }}">
                         <p>
-                            👩‍⚕️ Queue
+                            🙋‍♀️ Queue
                         </p>
                     </a>
                     <a href="{{ route('medical-record.index') }}" class="nav-link {{ Request::is('medical-record*') ? 'active' : ' ' }}">
                         <p>
-                            👩‍⚕️ Medical Record
+                            🩺 Medical Record
+                        </p>
+                    </a>
+                    <a href="{{ route('daily-report.index') }}" class="nav-link {{ Request::is('daily-report*') ? 'active' : ' ' }}">
+                        <p>
+                            📝 Daily Report
                         </p>
                     </a>
                 </li>

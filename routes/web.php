@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\FrontEndController;
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::post('/patient/{id}/medical-record', [PatientsController::class, 'storeMedicalRecord'])->name('patient.medical-record.store');
     // Route::get('/patients/{id}/medical-record/create', [PatientController::class, 'createMedicalRecord'])->name('patient.medical-record.create');
     Route::delete('/patients/medical-record/{id}', [PatientsController::class, 'destroyMedicalRecord'])->name('medical-record.destroy');
+    Route::resource('daily-report', DailyReportController::class);
 });
 
 Route::middleware(['auth', 'is_super_admin'])->group(function () {
