@@ -36,6 +36,9 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::resource('patients', PatientsController::class);
     Route::resource('patient-queue', PatientQueueController::class);
     Route::resource('medical-record', MedicalRecordController::class);
+    Route::post('/patient/{id}/medical-record', [PatientsController::class, 'storeMedicalRecord'])->name('patient.medical-record.store');
+    // Route::get('/patients/{id}/medical-record/create', [PatientController::class, 'createMedicalRecord'])->name('patient.medical-record.create');
+    Route::delete('/patients/medical-record/{id}', [PatientsController::class, 'destroyMedicalRecord'])->name('medical-record.destroy');
 });
 
 Route::middleware(['auth', 'is_super_admin'])->group(function () {
