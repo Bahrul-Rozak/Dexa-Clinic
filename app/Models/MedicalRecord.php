@@ -43,7 +43,7 @@ class MedicalRecord extends Model
 
     public function medication()
     {
-        return $this->belongsTo(Medication::class, 'medication_id');
+        return $this->belongsTo(Medications::class, 'medication_id');
     }
 
     public function clinic()

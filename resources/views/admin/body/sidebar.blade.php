@@ -52,6 +52,15 @@
                         </form>
                     </a>
                 </li>
+                <li class="nav-header">Master Data Daily</li>
+
+                <li class="nav-item">
+                    <a href="{{ route('patient-queue.index') }}" class="nav-link {{ Request::is('patient-queue*') ? 'active' : ' ' }}">
+                        <p>
+                            👩‍⚕️ Queue
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-header">Master Data Doctor</li>
 

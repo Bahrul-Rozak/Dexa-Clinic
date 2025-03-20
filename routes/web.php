@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\MedicationsController;
 use App\Http\Controllers\MedicationsTypeController;
+use App\Http\Controllers\PatientQueueController;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::post('medications/{id}/add-stock', [MedicationsController::class, 'addstock'])->name('medications.add_stock');
     Route::resource('employees', EmployeesController::class);
     Route::resource('patients', PatientsController::class);
+    Route::resource('patient-queue', PatientQueueController::class);
 });
 
 Route::middleware(['auth', 'is_super_admin'])->group(function () {
