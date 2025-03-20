@@ -62,7 +62,7 @@ class PatientQueueController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('patient-queue.index')->with('success', 'Data berhasil diperbarui!');
+        return redirect()->route('patient-queue.index')->with('message', 'Data berhasil diperbarui!');
     }
 
 

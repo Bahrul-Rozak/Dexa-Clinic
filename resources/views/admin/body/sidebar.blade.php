@@ -60,6 +60,11 @@
                             👩‍⚕️ Queue
                         </p>
                     </a>
+                    <a href="{{ route('medical-record.index') }}" class="nav-link {{ Request::is('medical-record*') ? 'active' : ' ' }}">
+                        <p>
+                            👩‍⚕️ Medical Record
+                        </p>
+                    </a>
                 </li>
 
                 <li class="nav-header">Master Data Doctor</li>

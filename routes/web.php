@@ -4,6 +4,7 @@ use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\MedicationsController;
 use App\Http\Controllers\MedicationsTypeController;
 use App\Http\Controllers\PatientQueueController;
@@ -34,6 +35,7 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::resource('employees', EmployeesController::class);
     Route::resource('patients', PatientsController::class);
     Route::resource('patient-queue', PatientQueueController::class);
+    Route::resource('medical-record', MedicalRecordController::class);
 });
 
 Route::middleware(['auth', 'is_super_admin'])->group(function () {
