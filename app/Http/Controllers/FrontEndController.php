@@ -15,9 +15,6 @@ class FrontEndController extends Controller
         return view('frontend.index', compact('doctors'));
     }
 
-    public function queue(){
-        return view('frontend.queue');
-    }
 
     public function patientSignUp(Request $request)
     {
@@ -82,6 +79,26 @@ class FrontEndController extends Controller
         session()->flash('examination_date', now()->format('Y-m-d'));
 
         return redirect('/')->with('success', 'Pendaftaran berhasil! Silakan tunggu antrian.');
+    }
+
+    public function queue()
+    {
+        // Ambil pasien yang sedang diperiksa (In Progress)
+        $currentPatient = MedicalRecord::where('status', 'In Progress')->first();
+
+        // Kalau tidak ada pasien "In Progress", ambil pasien "Waiting" pertama dan update ke "In Progress"
+        if (!$currentPatient) {
+            $currentPatient = MedicalRecord::where('status', 'Waiting')->orderBy('created_at')->first();
+
+            if ($currentPatient) {
+                $currentPatient->update(['status' => 'In Progress']);
+            }
+        }
+
+        // Ambil daftar pasien yang masih "Waiting"
+        $nextPatients = MedicalRecord::where('status', 'Waiting')->orderBy('created_at')->take(3)->get();
+
+        return view('frontend.queue', compact('currentPatient', 'nextPatients'));
     }
 
 }

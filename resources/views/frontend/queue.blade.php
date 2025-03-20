@@ -67,7 +67,7 @@
             <div class="col-md-6">
                 <div class="card bg-primary text-white">
                     <h1>Queue Number</h1>
-                    <h3 class="queue-number"></h3>
+                    <h3 class="queue-number">{{ $currentPatient ? $currentPatient->queue_number : '-' }}</h3>
                     <div id="clock"></div>
                 </div>
             </div>
@@ -80,19 +80,19 @@
             <div class="col-md-4">
                 <div class="card">
                     <p class="info-title">Patient Name</p>
-                    <p class="info-value"></p>
+                    <p class="info-value">{{ $currentPatient ? $currentPatient->patient->name : '-' }}</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <p class="info-title">To Doctor</p>
-                    <p class="info-value">dr. </p>
+                    <p class="info-value">dr. {{ $currentPatient ? $currentPatient->doctor->name : '-' }}</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <p class="info-title">Status</p>
-                    <p class="info-value"></p>
+                    <p class="info-value">{{ $currentPatient ? $currentPatient->status : '-' }}</p>
                 </div>
             </div>
         </div>
@@ -110,7 +110,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                       
+                        @foreach($nextPatients as $patient)
+                        <tr>
+                            <td>{{ $patient->queue_number }}</td>
+                            <td>{{ $patient->patient->name }}</td>
+                            <td>dr. {{ $patient->doctor->name }}</td>
+                            <td>
+                                @if ($patient->status == 'Waiting')
+                                <span class="badge bg-warning text-dark">Waiting</span>
+                                @elseif ($patient->status == 'In Progress')
+                                <span class="badge bg-primary">In Progress</span>
+                                @elseif ($patient->status == 'Completed')
+                                <span class="badge bg-success">Completed</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
