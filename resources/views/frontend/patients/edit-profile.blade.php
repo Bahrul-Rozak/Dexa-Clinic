@@ -13,28 +13,28 @@
             <div class="col-md-6">
                 <div class="form-group mb-3">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" 
-                           id="name" name="name" value="{{ old('name', $patient->name) }}" required>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                        id="name" name="name" value="{{ old('name', $patient->name) }}" required>
                     @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                           id="email" name="email" value="{{ old('email', $patient->email) }}" required>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                        id="email" name="email" value="{{ old('email', $patient->email) }}" required>
                     @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control @error('address') is-invalid @enderror" 
-                           id="address" name="address" value="{{ old('address', $patient->address) }}" required>
+                    <input type="text" class="form-control @error('address') is-invalid @enderror"
+                        id="address" name="address" value="{{ old('address', $patient->address) }}" required>
                     @error('address')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -45,7 +45,7 @@
                         <option value="female" {{ old('gender', $patient->gender) == 'female' ? 'selected' : '' }}>Female</option>
                     </select>
                     @error('gender')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -54,28 +54,28 @@
             <div class="col-md-6">
                 <div class="form-group mb-3">
                     <label for="birth_date">Birth Date</label>
-                    <input type="date" class="form-control @error('birth_date') is-invalid @enderror" 
-                           id="birth_date" name="birth_date" value="{{ old('birth_date', \Carbon\Carbon::parse($patient->birth_date)->format('Y-m-d')) }}" required>
+                    <input type="date" class="form-control @error('birth_date') is-invalid @enderror"
+                        id="birth_date" name="birth_date" value="{{ old('birth_date', \Carbon\Carbon::parse($patient->birth_date)->format('Y-m-d')) }}" required>
                     @error('birth_date')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="phone">Phone</label>
-                    <input type="text" class="form-control @error('phone') is-invalid @enderror" 
-                           id="phone" name="phone" value="{{ old('phone', $patient->phone) }}" required>
+                    <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                        id="phone" name="phone" value="{{ old('phone', $patient->phone) }}" required>
                     @error('phone')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="password">New Password (optional)</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                           id="password" name="password" autocomplete="new-password">
+                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                        id="password" name="password" autocomplete="new-password">
                     @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -92,36 +92,51 @@
     </form>
 
     <hr class="my-5">
-<h3 class="mb-3">My Medical Records</h3>
+    <h3 class="mb-3">My Medical Records</h3>
 
-@if($medicalRecords->isEmpty())
+    @if($medicalRecords->isEmpty())
     <div class="alert alert-info">No medical records found.</div>
-@else
+    @else
     <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-striped table-bordered" id="example">
             <thead class="table-primary">
                 <tr>
                     <th>Date</th>
+                    <th>Service</th>
+                    <th>Complaint</th>
                     <th>Diagnosis</th>
-                    <th>Prescription</th>
-                    <th>Doctor Notes</th>
-                    <th>Doctor</th>
+                    <th>Medication</th>
+                    <th>Qty</th>
+                    <th>Treatment</th>
+                    <th>Notes</th>
+                    <th>Blood Type</th>
+                    <th>Height (cm)</th>
+                    <th>Weight (kg)</th>
+                    <th>Waist (cm)</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($medicalRecords as $record)
-                    <tr>
-                        <td>{{ \Carbon\Carbon::parse($record->date)->format('d M Y') }}</td>
-                        <td>{{ $record->diagnosis }}</td>
-                        <td>{{ $record->prescription }}</td>
-                        <td>{{ $record->notes }}</td>
-                        <td>dr. {{ $record->doctor->name ?? '-' }}</td>
-                    </tr>
+                <tr>
+                    <td>{{ \Carbon\Carbon::parse($record->examination_date)->format('d M Y') }}</td>
+                    <td>{{ $record->service }}</td>
+                    <td>{{ $record->complaint }}</td>
+                    <td>{{ $record->diagnosis ?? '-' }}</td>
+                    <td>{{ $record->medication ? $record->medication->name : '-' }}</td>
+                    <td>{{ $record->medication_quantity ?? '-' }}</td>
+                    <td>{{ $record->treatment ?? '-' }}</td>
+                    <td>{{ $record->notes ?? '-' }}</td>
+                    <td>{{ $record->blood_type ?? '-' }}</td>
+                    <td>{{ $record->height ?? '-' }}</td>
+                    <td>{{ $record->weight ?? '-' }}</td>
+                    <td>{{ $record->waist ?? '-' }}</td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
+
     </div>
-@endif
+    @endif
 
 
 </div>
