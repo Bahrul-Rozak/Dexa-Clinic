@@ -30,6 +30,7 @@
         </div>
 
         <!-- Sidebar Menu -->
+        @if (auth()->check() && auth()->user()->is_admin)
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
@@ -55,7 +56,7 @@
                 <li class="nav-header">Master Data Daily</li>
 
                 <li class="nav-item">
-                     <a href="{{ route('message.index') }}" class="nav-link {{ Request::is('message*') ? 'active' : ' ' }}">
+                    <a href="{{ route('message.index') }}" class="nav-link {{ Request::is('message*') ? 'active' : ' ' }}">
                         <p>
                             📩 Message
                         </p>
@@ -140,6 +141,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
                 @if (auth()->check() && auth()->user()->is_super_admin)
                 <li class="nav-header">General Setting</li>
@@ -152,7 +154,19 @@
     </a>
 </li>
                 @endif
-               
+
+            @if (auth('patient')->check() && auth('patient')->user()->is_patient)
+
+    <li class=" nav-header">User
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : '' }}">
+                        <p>💻 My Profile</p>
+                    </a>
+                </li>
+                @endif
+
+
 
             </ul>
         </nav>

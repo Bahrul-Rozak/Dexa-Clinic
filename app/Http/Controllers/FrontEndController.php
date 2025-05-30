@@ -7,6 +7,7 @@ use App\Models\MedicalRecord;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class FrontEndController extends Controller
 {
@@ -31,6 +32,9 @@ class FrontEndController extends Controller
             'complaint' => 'required|string|max:255',
             'national_id' => 'required|string|max:50',
             'doctor_id' => 'required|exists:doctors,id', // Pastikan dokter ada di DB
+            'email' => 'required|email|unique:patients,email',
+            'password' => 'required'
+            
         ]);
 
         // Generate patient code
@@ -52,6 +56,8 @@ class FrontEndController extends Controller
             'national_id' => $request->national_id,
             'doctor_id' => $request->doctor_id,
             'complaint' => $request->complaint,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
         // Generate queue number

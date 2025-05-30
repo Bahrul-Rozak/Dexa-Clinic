@@ -8,6 +8,7 @@ use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\MedicationsController;
 use App\Http\Controllers\MedicationsTypeController;
+use App\Http\Controllers\PatientAuthController;
 use App\Http\Controllers\PatientQueueController;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\ProfileController;
@@ -20,6 +21,18 @@ Route::get('/', [FrontEndController::class, 'index']);
 
 Route::get('/queue', [FrontEndController::class, 'queue'])->name('queue');
 Route::post('/patient-sign-up', [FrontEndController::class, 'patientSignUp'])->name('patient.signup');
+
+Route::get('/patient/login', [PatientAuthController::class, 'showLoginForm'])->name('patient.login');
+Route::post('/patient/login', [PatientAuthController::class, 'login'])->name('patient.login.post');
+Route::post('/patient/logout', [PatientAuthController::class, 'logout'])->name('patient.logout');
+
+Route::middleware(['auth:patient','is_patient'])->group(function () {
+    Route::get('/patient/dashboard', function () {
+        return view('frontend.patients.dashboard');
+    })->name('patient.dashboard');
+});
+
+
 
 Route::get('/dashboard', function () {
     return view('admin.index');

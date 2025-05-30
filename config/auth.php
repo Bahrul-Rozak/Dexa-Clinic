@@ -40,6 +40,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // tambahin patient guard
+        'patient' => [
+            'driver' => 'session',  // atau 'token' tergantung kebutuhan
+            'provider' => 'patients',
+        ],
     ],
 
     /*
@@ -63,6 +69,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+        'patients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Patient::class,  // pastikan model ini ada
         ],
 
         // 'users' => [

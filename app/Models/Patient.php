@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Patient extends Model
+class Patient extends Authenticatable
 {
     protected $fillable = [
         'patient_code',
@@ -18,7 +19,9 @@ class Patient extends Model
         'occupation',
         'national_id',
         'doctor_id',
-        'clinic_id'
+        'clinic_id',
+        'email',
+        'password'
     ];
 
     public function doctor(){

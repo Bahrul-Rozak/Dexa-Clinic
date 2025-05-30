@@ -117,6 +117,7 @@
                 <p class="lead">Temukan Dokter, Buat Janji, Mudah.</p>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Coba Mendaftar!</button>
                 <a href="{{ route('queue') }}" class="btn btn-secondary">Lihat Antrian</a>
+                <a href="{{ route('patient.login') }}" class="btn btn-secondary">Sudah Punya Akun? login</a>
             </div>
             <div class="col-md-6">
                 <img src="https://img.freepik.com/free-photo/front-view-young-smiling-doctor_179666-27135.jpg" alt="doctor" class="img-fluid rounded">
@@ -180,6 +181,19 @@
                     <div class="modal-body">
                         <form action="" method="post">
                             @csrf
+                            <div class="mb-3 row">
+                                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                </div>
+                            </div>
+
                             <div class="mb-3 row">
                                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
