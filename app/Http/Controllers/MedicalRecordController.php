@@ -25,7 +25,7 @@ class MedicalRecordController extends Controller
         $medications = Medications::all();
         $clinics = Clinic::all();
 
-        return view('admin.backend.medical-record.create', compact('medicalRecord','patients', 'doctors', 'medications', 'clinics'));
+        return view('admin.backend.medical-record.create', compact('medicalRecord', 'patients', 'doctors', 'medications', 'clinics'));
     }
 
     public function store(Request $request)
@@ -85,7 +85,7 @@ class MedicalRecordController extends Controller
         $medications = Medications::all();
         $clinics = Clinic::all();
 
-        return view('admin.backend.medical-record.edit', compact( 'medical_data','patients', 'doctors', 'medications', 'clinics'));
+        return view('admin.backend.medical-record.edit', compact('medical_data', 'patients', 'doctors', 'medications', 'clinics'));
     }
 
     public function update(Request $request, MedicalRecord $medicalRecord)
@@ -138,4 +138,11 @@ class MedicalRecordController extends Controller
         return redirect()->route('medical-records.index')->with('message', 'Medical record deleted successfully.');
     }
 
+    public function print($id)
+    {
+        $patient = Patient::findOrFail($id);
+        $medicalRecords = MedicalRecord::where('patient_id', $id)->get();
+
+        return view('admin.backend.patients.print', compact('patient', 'medicalRecords'));
+    }
 }

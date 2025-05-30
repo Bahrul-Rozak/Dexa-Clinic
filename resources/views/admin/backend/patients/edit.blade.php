@@ -37,8 +37,8 @@
             <select name="gender" id="gender" class="form-control" name="gender">
                 @foreach(['male', 'female'] as $gender)
 
-                <option value="{{ $gender }}" 
-                @if ($patient_data->gender == $gender) selected @endif>{{ $gender }}
+                <option value="{{ $gender }}"
+                    @if ($patient_data->gender == $gender) selected @endif>{{ $gender }}
                 </option>
 
                 @endforeach
@@ -55,8 +55,8 @@
             <select name="religion" id="religion" class="form-control" name="religion">
                 @foreach(['islam', 'kristen', 'hindu', 'budha','konghucu'] as $religion)
 
-                <option value="{{ $religion }}" 
-                @if ($patient_data->religion == $religion) selected @endif>{{ $religion }}
+                <option value="{{ $religion }}"
+                    @if ($patient_data->religion == $religion) selected @endif>{{ $religion }}
                 </option>
 
                 @endforeach
@@ -67,8 +67,8 @@
             <label for="education">Education</label>
             <select name="education" id="education" class="form-control" name="education">
                 @foreach(['sd', 'smp', 'sma', 'sarjana', 'master', 'doctor'] as $education)
-                <option value="{{ $education }}" 
-                @if ($patient_data->education == $education) selected @endif>{{ $education }}
+                <option value="{{ $education }}"
+                    @if ($patient_data->education == $education) selected @endif>{{ $education }}
                 </option>
                 @endforeach
             </select>
@@ -79,8 +79,8 @@
             <select name="occupation" id="occupation" class="form-control" name="occupation">
                 @foreach(['employed', 'unemployed'] as $occupation)
 
-                <option value="{{ $occupation }}" 
-                @if ($patient_data->occupation == $occupation) selected @endif>{{ $occupation }}
+                <option value="{{ $occupation }}"
+                    @if ($patient_data->occupation == $occupation) selected @endif>{{ $occupation }}
                 </option>
 
                 @endforeach
@@ -95,13 +95,13 @@
         <div class="form-group">
             <label for="doctor_id">Doctor</label>
             <select name="doctor_id" id="doctor_id" class="form-control" name="doctor_id">
-            @foreach ($doctors as $doctor)
-                  <option value="{{ $doctor->id }}"
-                    @if ($patient_data->doctor_id == $doctor->id) 
+                @foreach ($doctors as $doctor)
+                <option value="{{ $doctor->id }}"
+                    @if ($patient_data->doctor_id == $doctor->id)
                     selected @endif>
                     dr. {{ $doctor->name }} - {{ $doctor->clinic->name }}
-                  </option>
-               @endforeach
+                </option>
+                @endforeach
             </select>
         </div>
 
@@ -113,10 +113,19 @@
 <hr>
 <h3>Medical Record History</h3>
 
-<!-- Tombol Tambah Rekam Medis -->
-<a href="javascript:void(0)" class="btn btn-primary create-medical-btn" data-patient-id="{{ $patient_data->id }}" data-name="{{ $patient_data->name }}">
-    Add
-</a>
+
+
+<div style="display: flex; align-items:center; gap: 10px;">
+    <!-- Tombol Tambah Rekam Medis -->
+    <a href="javascript:void(0)" class="btn btn-primary create-medical-btn" data-patient-id="{{ $patient_data->id }}" data-name="{{ $patient_data->name }}">
+        Add
+    </a>
+
+    <a href="{{ route('medical-record.print', $patient_data->id) }}" target="_blank" class="btn btn-info" style="margin: 0;">
+        Print Records
+    </a>
+</div>
+
 
 <table id="example" class="table table-striped table-bordered" width="100%;">
     <thead>
@@ -249,7 +258,7 @@
                             <div class="form-group">
                                 <label>Treatment</label>
                                 <select class="form-control" name="treatment">
-                                @foreach(["outpatient","inpatient"] as $treatment)
+                                    @foreach(["outpatient","inpatient"] as $treatment)
                                     <option value="{{ $treatment }}">{{ $treatment }}</option>
                                     @endforeach
                                 </select>
@@ -281,5 +290,5 @@
         });
     });
 </script>
-    
+
 @endsection
