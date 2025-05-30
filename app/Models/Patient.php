@@ -24,11 +24,19 @@ class Patient extends Authenticatable
         'password'
     ];
 
-    public function doctor(){
+    public function doctor()
+    {
         return $this->belongsTo(Model::class, 'doctor_id');
     }
 
-    public function clinic(){
+    public function clinic()
+    {
         return $this->belongsTo(Clinic::class, 'clinic_id');
+    }
+
+    // App\Models\Patient.php
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class);
     }
 }

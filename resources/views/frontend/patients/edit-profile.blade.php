@@ -90,6 +90,40 @@
             <button type="submit" class="btn btn-success">Update</button>
         </div>
     </form>
+
+    <hr class="my-5">
+<h3 class="mb-3">My Medical Records</h3>
+
+@if($medicalRecords->isEmpty())
+    <div class="alert alert-info">No medical records found.</div>
+@else
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>Date</th>
+                    <th>Diagnosis</th>
+                    <th>Prescription</th>
+                    <th>Doctor Notes</th>
+                    <th>Doctor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($medicalRecords as $record)
+                    <tr>
+                        <td>{{ \Carbon\Carbon::parse($record->date)->format('d M Y') }}</td>
+                        <td>{{ $record->diagnosis }}</td>
+                        <td>{{ $record->prescription }}</td>
+                        <td>{{ $record->notes }}</td>
+                        <td>dr. {{ $record->doctor->name ?? '-' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endif
+
+
 </div>
 
 @endsection

@@ -5,14 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\MedicalRecord; // pastikan ini di atas
+
 
 class PatientProfileController extends Controller
 {
-       public function edit()
+    // public function edit()
+    // {
+    //     $patient = Auth::guard('patient')->user();
+    //     return view('frontend.patients.edit-profile', compact('patient'));
+    // }
+
+    public function edit()
     {
         $patient = Auth::guard('patient')->user();
-        return view('frontend.patients.edit-profile', compact('patient'));
+        $medicalRecords = $patient->medicalRecords()->latest()->get(); // ambil relasi
+
+        return view('frontend.patients.edit-profile', compact('patient', 'medicalRecords'));
     }
+
 
     public function update(Request $request)
     {
