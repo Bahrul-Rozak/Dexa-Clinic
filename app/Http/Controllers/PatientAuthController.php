@@ -12,17 +12,6 @@ class PatientAuthController extends Controller
         return view('frontend.patients.login');
     }
 
-    // public function login(Request $request)
-    // {
-    //     $credentials = $request->only('email', 'password');
-
-    //     if (Auth::guard('patient')->attempt($credentials)) {
-    //         return redirect()->route('patient.dashboard');
-    //     }
-
-    //     return back()->withErrors(['email' => 'Email or password is incorrect']);
-    // }
-
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -39,4 +28,5 @@ class PatientAuthController extends Controller
         Auth::guard('patient')->logout();
         return redirect()->route('patient.login');
     }
+
 }

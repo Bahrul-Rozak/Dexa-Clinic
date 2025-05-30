@@ -147,27 +147,35 @@
                 <li class="nav-header">General Setting</li>
 
                 <li class="nav-item">
-                    <a href="{{  route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : ' ' }}"">
-        <p>
-            💻 User Management
-        </p>
-    </a>
-</li>
+                    <a href="{{ route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : ' ' }}"">
+                    <p>
+                        💻 User Management
+                    </p>
+                </a>
+                </li>
                 @endif
 
-            @if (auth('patient')->check() && auth('patient')->user()->is_patient)
+                @if (auth('patient')->check())
 
-    <li class=" nav-header">User
-                </li>
                 <li class="nav-item">
-                    <a href="{{ route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : '' }}">
+                    <a href="{{ route('patient.profile.edit') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : '' }}">
                         <p>💻 My Profile</p>
+                    </a>
+                    <a href="{{ route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : '' }}">
+                        <p>📩 My Message</p>
+                    </a>
+                </li>
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <p>
+                            👉 Logout
+                        </p>
+                        <form action="{{ route('logout') }}" method="POST" style="display: none;" id="logout-form">
+                            @csrf
+                        </form>
                     </a>
                 </li>
                 @endif
-
-
-
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

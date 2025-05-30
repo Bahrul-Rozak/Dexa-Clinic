@@ -9,6 +9,7 @@ use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\MedicationsController;
 use App\Http\Controllers\MedicationsTypeController;
 use App\Http\Controllers\PatientAuthController;
+use App\Http\Controllers\PatientProfileController;
 use App\Http\Controllers\PatientQueueController;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\ProfileController;
@@ -30,8 +31,11 @@ Route::middleware(['auth:patient','is_patient'])->group(function () {
     Route::get('/patient/dashboard', function () {
         return view('frontend.patients.dashboard');
     })->name('patient.dashboard');
-});
 
+     // Route untuk edit profile pasien
+    Route::get('/patient/profile/edit', [PatientProfileController::class, 'edit'])->name('patient.profile.edit');
+    Route::post('/patient/profile/update', [PatientProfileController::class, 'update'])->name('patient.profile.update');
+});
 
 
 Route::get('/dashboard', function () {
