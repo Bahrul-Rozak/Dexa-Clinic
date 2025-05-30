@@ -13,6 +13,7 @@ use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserMessageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontEndController::class, 'index']);
@@ -42,6 +43,7 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::delete('/patients/medical-record/{id}', [PatientsController::class, 'destroyMedicalRecord'])->name('medical-record.destroy');
     Route::get('/patients/{id}/medical-records/print', [MedicalRecordController::class, 'print'])->name('medical-record.print');
     Route::resource('daily-report', DailyReportController::class);
+    Route::resource('message', UserMessageController::class);
 });
 
 Route::middleware(['auth', 'is_super_admin'])->group(function () {

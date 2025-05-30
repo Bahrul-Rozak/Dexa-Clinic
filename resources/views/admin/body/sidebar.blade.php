@@ -55,6 +55,11 @@
                 <li class="nav-header">Master Data Daily</li>
 
                 <li class="nav-item">
+                     <a href="{{ route('message.index') }}" class="nav-link {{ Request::is('message*') ? 'active' : ' ' }}">
+                        <p>
+                            📩 Message
+                        </p>
+                    </a>
                     <a href="{{ route('patient-queue.index') }}" class="nav-link {{ Request::is('patient-queue*') ? 'active' : ' ' }}">
                         <p>
                             🙋‍♀️ Queue
