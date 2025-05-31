@@ -85,9 +85,21 @@ class PatientQueueController extends Controller
 
         // Kirim notifikasi ke Telegram kalau status sesuai yang diinginkan
         if (in_array($queue->status, ['In Progress'])) {
-            $message = "📢 <b>Pengingat Antrian</b>\n\n" .
-                "Yth. <b>{$queue->patient->name}</b>, harap bersiap menuju ruang praktek dokter <b>{$queue->doctor->name}</b>.\n" .
-                "Terima kasih.";
+            // $message = "📢 <b>Pengingat Antrian</b>\n\n" .
+            //     "Yth. <b>{$queue->patient->name}</b>, harap bersiap menuju ruang praktek dokter <b>{$queue->doctor->name}</b>.\n" .
+            //     "Terima kasih.";
+            $message = "🔔 <b>Reminder Antrian Pasien</b>\n\n" .
+                "🧑 Pasien: <b>{$queue->patient->name}</b>\n" .
+                "💉 Dokter: <b>{$queue->doctor->name}</b>\n" .
+                "📅 Tanggal: <b>" . $queue->created_at->format('d M Y') . "</b>\n" .
+                "⏰ Waktu: <b>" . $queue->created_at->format('H:i') . " WIB</b>\n" .
+                "🔢 Nomor Antrian: <b>{$queue->queue_number}</b>\n" .
+                "📍 Lokasi: <b>Ruang Poli Umum, Lantai 1</b>\n" .
+                "📝 Keluhan: {$queue->complaint}\n\n" .
+                "📞 Jika ada pertanyaan, hubungi 0812-3456-7890\n" .
+                "🙏 Mohon konfirmasi kehadiran dengan membalas pesan ini.\n" .
+                "Terima kasih!";
+
 
             $this->telegram->sendMessage($message);
         }
