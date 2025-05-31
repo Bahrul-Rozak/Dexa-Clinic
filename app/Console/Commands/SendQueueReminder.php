@@ -22,9 +22,9 @@ class SendQueueReminder extends Command
     public function handle()
     {
         $queues = MedicalRecord::with('patient', 'doctor')
-                    ->where('status', 'Waiting')
-                    ->whereDate('created_at', now()->toDateString())
-                    ->get();
+            ->where('status', 'Waiting')
+            ->whereDate('created_at', now()->toDateString())
+            ->get();
 
         foreach ($queues as $queue) {
             $message = "🔔 Reminder Antrian\n\n" .
@@ -33,7 +33,7 @@ class SendQueueReminder extends Command
                 "🕑 Waktu Daftar: " . $queue->created_at->format('H:i') . "\n" .
                 "📍 Status: {$queue->status}\n" .
                 "Mohon bersiap dan datang tepat waktu.";
-            
+
             $this->telegram->sendMessage($message);
         }
 
@@ -41,8 +41,7 @@ class SendQueueReminder extends Command
     }
 
     protected function schedule(Schedule $schedule)
-{
-    $schedule->command('queue:send-reminder')->everyOneMinutes();
-}
-
+    {
+        $schedule->command('queue:send-reminder')->everyOneMinutes();
+    }
 }
