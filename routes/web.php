@@ -27,7 +27,7 @@ Route::get('/patient/login', [PatientAuthController::class, 'showLoginForm'])->n
 Route::post('/patient/login', [PatientAuthController::class, 'login'])->name('patient.login.post');
 Route::post('/patient/logout', [PatientAuthController::class, 'logout'])->name('patient.logout');
 
-Route::middleware(['auth:patient','is_patient'])->group(function () {
+Route::middleware(['auth:patient','is_patient', 'single.device'])->group(function () {
     Route::get('/patient/dashboard', function () {
         return view('frontend.patients.dashboard');
     })->name('patient.dashboard');
