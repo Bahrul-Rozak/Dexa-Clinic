@@ -6,10 +6,19 @@ use App\Models\Doctor;
 use App\Models\MedicalRecord;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use App\Services\TelegramService;
 
 class PatientQueueController extends Controller
 {
-    public function index(){
+    protected $telegram;
+
+    public function __construct(TelegramService $telegram)
+    {
+        $this->telegram = $telegram;
+    }
+
+    public function index()
+    {
         $queue_data = MedicalRecord::with('patient', 'doctor')->get();
         return view('admin.backend.patient-queue.index', compact('queue_data'));
     }
@@ -25,6 +34,18 @@ class PatientQueueController extends Controller
         ]);
 
         MedicalRecord::create($request->all());
+        // $queue = MedicalRecord::create($request->all());
+
+        // // Cek status sebelum kirim notif
+        // if ($queue->status == 'Waiting' || $queue->status == 'In Progress') {
+        //     $message = "📢 <b>Reminder Antrian Baru</b>\n\n" .
+        //         "🧑 Pasien: <b>" . $queue->patient->name . "</b>\n" .
+        //         "💉 Dokter: <b>" . $queue->doctor->name . "</b>\n" .
+        //         "🕑 Jam Daftar: <b>" . $queue->created_at->format('H:i') . "</b>\n" .
+        //         "📝 Keluhan: " . ($queue->complaint ?? '-');
+
+        //     $this->telegram->sendMessage($message);
+        // }
 
         return redirect()->route('patient-queue.index')->with('success', 'Data antrian berhasil ditambahkan!');
     }
@@ -61,6 +82,15 @@ class PatientQueueController extends Controller
             'complaint' => $request->complaint,
             'status' => $request->status,
         ]);
+
+        // Kirim notifikasi ke Telegram kalau status sesuai yang diinginkan
+        if (in_array($queue->status, ['In Progress'])) {
+            $message = "📢 <b>Pengingat Antrian</b>\n\n" .
+                "Yth. <b>{$queue->patient->name}</b>, harap bersiap menuju ruang praktek dokter <b>{$queue->doctor->name}</b>.\n" .
+                "Terima kasih.";
+
+            $this->telegram->sendMessage($message);
+        }
 
         return redirect()->route('patient-queue.index')->with('message', 'Data berhasil diperbarui!');
     }
