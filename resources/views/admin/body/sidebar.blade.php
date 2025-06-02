@@ -10,12 +10,23 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}" class="img-circle elevation-2" alt="User Image">
+                @php
+                $user = Auth::user();
+                $picture = $user->picture ?? null; // asumsi kolom 'picture' di tabel users atau patients
+                @endphp
+
+                @if ($picture)
+                <img src="{{ $picture }}" class="img-circle elevation-2" alt="User Image" style="width: 50px; height: 50px; object-fit: cover;">
+                @else
+                <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random&color=fff&size=50" class="img-circle elevation-2" alt="User Avatar">
+                @endif
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
+
+
 
         <!-- SidebarSearch Form -->
         <div class="form-inline">
@@ -157,13 +168,13 @@
 
                 @if (auth('patient')->check())
 
-                <li class="nav-item">
-                    <a href="{{ route('patient.profile.edit') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : '' }}">
-                        <p>💻 My Profile</p>
-                    </a>
-                    <a href="{{ route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : '' }}">
-                        <p>📩 My Message</p>
-                    </a>
+                <li class=" nav-item">
+                        <a href="{{ route('patient.profile.edit') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : '' }}">
+                            <p>💻 My Profile</p>
+                        </a>
+                        <a href="{{ route('user-management.index') }}" class="nav-link {{ Request::is('user-management*') ? 'active' : '' }}">
+                            <p>📩 My Message</p>
+                        </a>
                 </li>
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

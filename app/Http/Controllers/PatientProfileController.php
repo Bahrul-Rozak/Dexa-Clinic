@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\MedicalRecord; // pastikan ini di atas
+use JD\Cloudder\Facades\Cloudder; // import Cloudder
 
 
 class PatientProfileController extends Controller
@@ -37,6 +38,7 @@ class PatientProfileController extends Controller
             'phone' => 'required|string|max:255',
             'email' => 'required|email|unique:patients,email,' . $patient->id,
             'password' => 'nullable|string|min:6|confirmed', // password_confirmation field di form
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
         ]);
 
         $patient->name = $request->name;
@@ -49,6 +51,19 @@ class PatientProfileController extends Controller
         if ($request->filled('password')) {
             $patient->password = Hash::make($request->password);
         }
+
+        if ($request->hasFile('picture')) {
+            $image = $request->file('picture');
+
+            // Upload ke Cloudinary
+            Cloudder::upload($image->getRealPath(), null);
+
+            $uploadResult = Cloudder::getResult();
+
+            // Simpan URL gambar di DB
+            $patient->picture = $uploadResult['secure_url'];
+        }
+
 
         $patient->save();
 

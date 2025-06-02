@@ -73,4 +73,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/test-telegram', function (App\Services\TelegramService $telegram) {
+    $telegram->sendMessage("Test message from Laravel at " . now());
+    return "Sent";
+});
+
 require __DIR__ . '/auth.php';

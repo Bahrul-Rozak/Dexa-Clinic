@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <h2 class="mb-4">Edit My Profile</h2>
 
-    <form action="{{ route('patient.profile.update') }}" method="POST">
+    <form action="{{ route('patient.profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row">
@@ -60,6 +60,23 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <div class="mb-3">
+                    <label for="picture" class="form-label">Profile Picture</label>
+
+                    <div class="mb-3 image">
+                        @if ($patient->picture)
+                        <img src="{{ $patient->picture }}" alt="Profile Picture" class="img-thumbnail" style="max-width: 150px;">
+                        @else
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($patient->name) }}" alt="User Avatar" class="img-circle elevation-2" style="max-width: 150px;">
+                        @endif
+                    </div>
+
+                    <input type="file" class="form-control" id="picture" name="picture" accept="image/*">
+                </div>
+
+
+
 
                 <div class="form-group mb-3">
                     <label for="phone">Phone</label>
