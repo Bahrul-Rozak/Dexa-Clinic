@@ -6,13 +6,18 @@ use App\Models\Doctor;
 use App\Models\MedicalRecord;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class FrontEndController extends Controller
 {
-    public function index(){
-        $doctors = Doctor::with('clinic')->get();
+    public function index()
+    {
+        $doctors = Cache::remember('frontend.index.doctors', now()->addMinutes(10), function () {
+            return Doctor::with('clinic')->get();
+        });
+
         return view('frontend.index', compact('doctors'));
     }
 
@@ -34,7 +39,7 @@ class FrontEndController extends Controller
             'doctor_id' => 'required|exists:doctors,id', // Pastikan dokter ada di DB
             'email' => 'required|email|unique:patients,email',
             'password' => 'required'
-            
+
         ]);
 
         // Generate patient code
@@ -89,22 +94,26 @@ class FrontEndController extends Controller
 
     public function queue()
     {
-        // Ambil pasien yang sedang diperiksa (In Progress)
+        // Ambil pasien yang sedang diperiksa
         $currentPatient = MedicalRecord::where('status', 'In Progress')->first();
 
-        // Kalau tidak ada pasien "In Progress", ambil pasien "Waiting" pertama dan update ke "In Progress"
+        // Kalau belum ada, ambil yang waiting lalu update status
         if (!$currentPatient) {
             $currentPatient = MedicalRecord::where('status', 'Waiting')->orderBy('created_at')->first();
 
             if ($currentPatient) {
                 $currentPatient->update(['status' => 'In Progress']);
+
+                // Hapus cache nextPatients biar daftar antrean update
+                Cache::forget('queue.nextPatients');
             }
         }
 
-        // Ambil daftar pasien yang masih "Waiting"
-        $nextPatients = MedicalRecord::where('status', 'Waiting')->orderBy('created_at')->take(3)->get();
+        // Ambil antrean berikutnya dari cache atau query baru
+        $nextPatients = Cache::remember('queue.nextPatients', now()->addSeconds(30), function () {
+            return MedicalRecord::where('status', 'Waiting')->orderBy('created_at')->take(3)->get();
+        });
 
         return view('frontend.queue', compact('currentPatient', 'nextPatients'));
     }
-
 }
