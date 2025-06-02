@@ -16,6 +16,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserMessageController;
+use App\Jobs\SendTelegramMessageJob;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontEndController::class, 'index']);
@@ -73,9 +74,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/test-telegram', function (App\Services\TelegramService $telegram) {
-    $telegram->sendMessage("Test message from Laravel at " . now());
-    return "Sent";
+// Route::get('/test-telegram', function (App\Services\TelegramService $telegram) {
+//     $telegram->sendMessage("Test message from Laravel at " . now());
+//     return "Sent";
+// });
+
+Route::get('/test-telegram', function () {
+    $message = "Test message from Laravel Queue at " . now();
+    SendTelegramMessageJob::dispatch($message);
+    return "Queued";
 });
+
+// php artisan queue:work dan jalankan test-telegram di browser
+
 
 require __DIR__ . '/auth.php';
