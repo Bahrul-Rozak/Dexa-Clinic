@@ -14,4 +14,3 @@ commands:
   - "php artisan config:cache"
   - "php artisan view:cache"
   - "php artisan storage:link"
-  - "chmod -R 775 storage bootstrap/cache"
